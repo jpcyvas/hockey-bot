@@ -28,14 +28,14 @@ async function getData(){
 
     var gameTime = "";
 
-    var output = "===== GAME FOR TODAY ===== \n";
+    var output = "===== NHL Games for "+getTodaysDate()+" ===== \n";
     
     // loop through the data and get the games for just today
     for(var key of Object.keys(data.gameWeek)){
         if(data.gameWeek[key].date == date){
             //check to make sure there are games
             if(data.gameWeek[key].games == undefined || data.gameWeek[key].games.length == 0){
-                output += "No games today.\n";
+                output += "No games today :'( \n";
                 return output;
             } else {
                 for(var y = 0; y < data.gameWeek[key].games.length;y++){
@@ -48,7 +48,7 @@ async function getData(){
                     gameTime = "";
                     try{
                         gameTime = new Date(data.gameWeek[key].games[y].startTimeUTC).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit' });
-                        output += " (" + gameTime + " CT)";
+                        output += " @ " + gameTime + " CT";
                     } catch(e){
                         // do nothing, just leave gameTime blank
                     } finally{
@@ -59,7 +59,10 @@ async function getData(){
             }
 
         }
+
+
     }
+    output += "=============================================";
     
     return output;
 }
