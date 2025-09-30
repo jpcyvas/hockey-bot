@@ -41,14 +41,14 @@ async function getData(){
                 for(var y = 0; y < data.gameWeek[key].games.length;y++){
                    
                     //get teams
-                    output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev + "\n";
+                    output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev;
 
 
                      //convert UTC time to local time
                     gameTime = "";
                     try{
                         gameTime = new Date(data.gameWeek[key].games[y].startTimeUTC).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit' });
-                        output += "(" + gameTime + " CT)";
+                        output += " (" + gameTime + " CT)";
                     } catch(e){
                         // do nothing, just leave gameTime blank
                     } finally{
