@@ -1,8 +1,8 @@
 name: Daily Hockey Message
 
 on:
-  #schedule:
-   # - cron: "0 12 * * *"
+  schedule:
+    - cron: "0 17 * * *"
   workflow_dispatch: # manual
 
 jobs:
