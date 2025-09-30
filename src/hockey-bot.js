@@ -26,14 +26,38 @@ async function getData(){
     const data = await makeAPICall();
     const date = getTodaysDate();
 
+    var gameTime = "";
+
     var output = "===== GAME FOR TODAY ===== \n";
     
     // loop through the data and get the games for just today
     for(var key of Object.keys(data.gameWeek)){
         if(data.gameWeek[key].date == date){
-            for(var y = 0; y < data.gameWeek[key].games.length;y++){
-                output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev + "\n";
+            //check to make sure there are games
+            if(data.gameWeek[key].games == undefined || data.gameWeek[key].games.length == 0){
+                output += "No games today.\n";
+                return output;
+            } else {
+                for(var y = 0; y < data.gameWeek[key].games.length;y++){
+                   
+                    //get teams
+                    output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev + "\n";
+
+
+                     //convert UTC time to local time
+                    gameTime = "";
+                    try{
+                        gameTime = new Date(data.gameWeek[key].games[y].startTimeUTC).toLocaleTimeString('en-US', { timeZone: 'America/Chicago', hour: '2-digit', minute: '2-digit' });
+                        output += "(" + gameTime + " CT)";
+                    } catch(e){
+                        // do nothing, just leave gameTime blank
+                    } finally{
+                        output += "\n";
+                    } 
+
+                }
             }
+
         }
     }
     
