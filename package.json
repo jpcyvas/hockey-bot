@@ -1,0 +1,24 @@
+{
+  "name": "hockey-bot",
+  "version": "1.0.0",
+  "description": "Discord Hockey Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpcyvas/hockey-bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpcyvas/hockey-bot/issues"
+  },
+  "homepage": "https://github.com/jpcyvas/hockey-bot#readme",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "express": "^5.1.0"
+  }
+}
