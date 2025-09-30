@@ -4,11 +4,9 @@ const hockeyApiUrl = 'https://api-web.nhle.com/v1/schedule/';
 
 //Get today's date in YYYY-MM-DD format
 function getTodaysDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
+    // produce YYYY-MM-DD in US Central time
+    const now = new Date();
+    return now.toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
 }
 
 
@@ -16,7 +14,6 @@ function getTodaysDate() {
 async function makeAPICall() {
     try {
         const fullRequestUrl = hockeyApiUrl + getTodaysDate(); // fixed variable name
-        console.log('Requesting URL:', fullRequestUrl);
         const response = await axios.get(fullRequestUrl);
         return response.data; // return the JSON body, not the axios response object
     } catch (error) {
