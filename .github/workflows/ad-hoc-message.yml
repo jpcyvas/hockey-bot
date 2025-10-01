@@ -7,6 +7,14 @@ on:
             description: 'Message to send to Discord'
             required: true
             default: 'Hello from Hockey Bot!'
+        webhook:
+            description: 'Discord'
+            required: true
+            default: Test
+            type: choice
+            options:
+            - Test
+            - WonderPals
        
 
 jobs:
@@ -14,6 +22,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Select enviorment
+        run: |
+          if [ "${{ github.event.inputs.webhook }}" = "Test" ]; then
+            echo "DISCORD_WEBHOOK=${{ secrets.DISCORD_WEBHOOK }}" >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.webhook }}" = "WonderPals" ]; then
+            echo "DISCORD_WEBHOOK=${{ secrets.WEBHOOK_DISCORD_WONDERPALS_HOCKEY }}" >> $GITHUB_ENV
+          else
+            echo "Invalid webhook option"
+            exit 1
+          fi 
+
 
       - name: Discord notification
         env:
