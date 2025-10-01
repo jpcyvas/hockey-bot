@@ -3,13 +3,25 @@ name: Daily Hockey Message
 on:
   schedule:
     - cron: "0 17 * * *"
-  workflow_dispatch: # manual
+  workflow_dispatch:
+    inputs:
+        webhook:
+            description: 'Discord'
+            required: true
+            default: WonderPals
+            type: choice
+            options:
+            - Test
+            - WonderPals
 
 jobs:
   daily-message:
     runs-on: ubuntu-latest
 
     steps:
+      
+
+    
       - uses: actions/checkout@v4
 
       - name: Setup Node
@@ -29,6 +41,17 @@ jobs:
           echo "schedule<<EOF" >> $GITHUB_OUTPUT
           cat schedule.txt >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Select enviorment
+        run: |
+          if [ "${{ github.event.inputs.webhook }}" = "Test" ]; then
+            echo "DISCORD_WEBHOOK=${{ secrets.DISCORD_WEBHOOK }}" >> $GITHUB_ENV
+          elif [ "${{ github.event.inputs.webhook }}" = "WonderPals" ]; then
+            echo "DISCORD_WEBHOOK=${{ secrets.WEBHOOK_DISCORD_WONDERPALS_HOCKEY }}" >> $GITHUB_ENV
+          else
+            echo "Invalid webhook option"
+            exit 1
+          fi    
 
       - name: Discord notification
         env:
