@@ -21,4 +21,4 @@ jobs:
             DISCORD_USERNAME: Hockey Bot
         uses: Ilshidur/action-discord@master
         with:
-          args: "${{ steps.get_schedule.outputs.schedule }}"
+          args: "${{ github.event.inputs.message }}"
