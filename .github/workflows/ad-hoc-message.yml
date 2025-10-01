@@ -1,0 +1,24 @@
+name: Ad Hoc Hockey Message
+
+on:
+  workflow_dispatch: # manual
+    inputs:
+        message:
+            description: 'Message to send to Discord'
+            required: true
+            default: 'Hello from Hockey Bot!'
+       
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Discord notification
+        env:
+            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+            DISCORD_USERNAME: Hockey Bot
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "${{ steps.get_schedule.outputs.schedule }}"
