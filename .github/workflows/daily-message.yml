@@ -19,9 +19,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      
-
-    
       - uses: actions/checkout@v4
 
       - name: Setup Node
@@ -44,18 +41,26 @@ jobs:
 
       - name: Select enviorment
         run: |
-          if [ "${{ github.event.inputs.webhook }}" = "Test" ]; then
+          # read the webhook input (empty string for schedule runs)
+          selection="${{ github.event.inputs.webhook }}"
+
+          # fallback to WonderPals when no input was provided (cron run)
+          if [ -z "$selection" ]; then
+            selection="WonderPals"
+          fi
+
+          if [ "$selection" = "Test" ]; then
             echo "DISCORD_WEBHOOK=${{ secrets.DISCORD_WEBHOOK }}" >> $GITHUB_ENV
-          elif [ "${{ github.event.inputs.webhook }}" = "WonderPals" ]; then
+          elif [ "$selection" = "WonderPals" ]; then
             echo "DISCORD_WEBHOOK=${{ secrets.WEBHOOK_DISCORD_WONDERPALS_HOCKEY }}" >> $GITHUB_ENV
           else
-            echo "Invalid webhook option"
+            echo "Invalid webhook option: $selection" >&2
             exit 1
-          fi    
+          fi
 
       - name: Discord notification
         env:
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+            DISCORD_WEBHOOK: ${{ env.DISCORD_WEBHOOK }}
             DISCORD_USERNAME: Hockey Bot
         uses: Ilshidur/action-discord@master
         with:
