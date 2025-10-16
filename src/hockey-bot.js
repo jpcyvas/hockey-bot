@@ -117,7 +117,6 @@ async function getWeeklyStandings(){
                 output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`;
             }
         });
-        output += "=============================\n \n";
 
         output += "==============================\n"
         output += "# Western Conference \n";
@@ -139,7 +138,6 @@ async function getWeeklyStandings(){
             }        
         });    
 
-        output += '=============================\n';
         return output;
     }
     catch(e){
