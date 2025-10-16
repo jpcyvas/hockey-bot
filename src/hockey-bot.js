@@ -1,6 +1,7 @@
 const axios = require('axios');
 
-const hockeyApiUrl = 'https://api-web.nhle.com/v1/schedule/';
+const hockeyApiUrlDailyGames = 'https://api-web.nhle.com/v1/schedule/';
+const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/';
 
 //Get today's date in YYYY-MM-DD format
 function getTodaysDate() {
@@ -11,19 +12,19 @@ function getTodaysDate() {
 
 
 //Fetch data from the API
-async function makeAPICall() {
+async function makeAPICall(apiURL) {
     try {
-        const fullRequestUrl = hockeyApiUrl + getTodaysDate(); // fixed variable name
+        const fullRequestUrl = apiURL + getTodaysDate(); 
         const response = await axios.get(fullRequestUrl);
-        return response.data; // return the JSON body, not the axios response object
+        return response.data;
     } catch (error) {
         console.error('Error fetching data from the API:', error.stack || error);
         throw error; // rethrow so server can send 500 and log details
     }
 }
 
-async function getData(){
-    const data = await makeAPICall();
+async function getDailyData(){
+    const data = await makeAPICall(hockeyApiUrlDailyGames);
     const date = getTodaysDate();
 
     var gameTime = "";
@@ -67,6 +68,84 @@ async function getData(){
     return output;
 }
 
+async function getWeeklyStandings(){
+    const data = await makeAPICall(hockeyApiUrlWeeklyStandings);
+    var output = "===== NHL Weekly Standings =====\n";
+
+    var standingsObject = {
+        EasternAtlantic: [],
+        EasternMetropolitan: [],
+        EasternWildCard: [],
+        WesternCentral: [],
+        WesternPacific: [],
+        WesternWildCard: []
+    }
+
+    var standingName = "";
+
+    try{
+        for(var x = 0; x < data.standings.length; x++){
+            standingName = data.standings[x].conferenceName+data.standings[x].divisionName;
+            if(standingsObject[standingName].length < 3){
+                standingsObject[standingName].push(data.standings[x]);
+            } else {
+                standingsObject[data.standings[x].conferenceName+"WildCard"].push(data.standings[x]);    
+            }
+        }
+    }
+    catch(e){
+        output = "Something went wrong getting the standings :'( \n";
+        return output;
+    }
+
+    try{
+        output = "----- Eastern Conference -----\n";
+        output += "=== Atlantic Division ===\n";
+        standingsObject.EasternAtlantic.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });
+        output += "=============================\n";
+        output += "=== Metropolitan Division ===\n";    
+        standingsObject.EasternMetropolitan.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });
+        output += "=============================\n";
+        output += "=== Wild Cards ===\n";
+        standingsObject.EasternWildCard.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });
+
+        output += "=============================\n";
+        output += "----- Western Conference -----\n";
+        output += "=== Central Division ===\n";
+        standingsObject.WesternCentral.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });
+        output += "=============================\n";
+        output += "=== Pacific Division ===\n";
+        standingsObject.WesternPacific.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });
+        output += "=============================\n";
+        output += "=== Wild Cards ===\n";
+        standingsObject.WesternWildCard.forEach(team => {
+            output += `${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+        });    
+
+        output += '=============================\n';
+        return output;
+    }
+    catch(e){
+        output = "Something went wrong working with the standings :'( \n";
+        return output;
+    }
+
+    
+
+}
+
+
 module.exports = {
-    getData
+    getDailyData,
+    getWeeklyStandings
 }

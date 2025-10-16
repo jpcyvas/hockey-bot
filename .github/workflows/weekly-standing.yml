@@ -1,8 +1,8 @@
-name: Daily Hockey Message
+name: Weekly Standings Hockey Message
 
 on:
   schedule:
-    - cron: "0 17 * * *"
+    - cron: "0 10 * * 6"
   workflow_dispatch:
     inputs:
         webhook:
@@ -32,8 +32,8 @@ jobs:
       - name: Get schedule
         id: get_schedule
         run: |
-          # call your getDailyData() and save to a file
-          node -e "require('./src/hockey-bot').getDailyData().then(d=>console.log(d)).catch(err=>{ console.error(err); process.exit(1); })" > schedule.txt
+          # call your getWeeklyStandings() and save to a file
+          node -e "require('./src/hockey-bot').getDgetWeeklyStandingsailyData().then(d=>console.log(d)).catch(err=>{ console.error(err); process.exit(1); })" > schedule.txt
           # expose the file contents as a multiline GitHub Actions output
           echo "schedule<<EOF" >> $GITHUB_OUTPUT
           cat schedule.txt >> $GITHUB_OUTPUT

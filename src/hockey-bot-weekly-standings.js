@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { getData } = require('./hockey-bot');
+const { getWeeklyStandings } = require('./hockey-bot');
 
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // proxy endpoint to avoid CORS
 app.get('/api/schedule', async (req, res) => {
   try {
-        const data = await getData();
+        const data = await getWeeklyStandings();
         res.json(data);
   } catch (err) {
         console.error('API error:', err.stack || err);
