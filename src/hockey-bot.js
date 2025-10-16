@@ -29,7 +29,7 @@ async function getDailyData(){
 
     var gameTime = "";
 
-    var output = "===== NHL Games for "+getTodaysDate()+" ===== \n";
+    var output = "# NHL Games for "+getTodaysDate()+" \n";
     
     // loop through the data and get the games for just today
     for(var key of Object.keys(data.gameWeek)){
@@ -63,7 +63,6 @@ async function getDailyData(){
 
 
     }
-    output += "====================================";
     
     return output;
 }
