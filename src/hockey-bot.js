@@ -99,10 +99,10 @@ async function getWeeklyStandings(){
     }
 
     try{
-        output += "==========================\n"
-        output = "=== Eastern Conference ===\n";
-        output += "==========================\n"
-        output += "=== Atlantic Division ===\n";
+        output += "=============================\n"
+        output += "===== Eastern Conference ====\n";
+        output += "=============================\n"
+        output += "===== Atlantic Division =====\n";
         standingsObject.EasternAtlantic.forEach((team, index) => {
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });
@@ -112,26 +112,26 @@ async function getWeeklyStandings(){
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });
         output += "=============================\n";
-        output += "=== Wild Cards ===\n";
+        output += "========= Wild Card =========\n";
         standingsObject.EasternWildCard.forEach((team, index) => {
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });
         output += "=============================\n \n";
 
-        output += "==========================\n"
-        output += "=== Western Conference ===\n";
-        output += "==========================\n"
-        output += "=== Central Division ===\n";
+        output += "==============================\n"
+        output += "===== Western Conference =====\n";
+        output += "==============================\n"
+        output += "====== Central Division ======\n";
         standingsObject.WesternCentral.forEach((team, index) => {
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });
         output += "=============================\n";
-        output += "=== Pacific Division ===\n";
+        output += "===== Pacific Division ======\n";
         standingsObject.WesternPacific.forEach((team, index) => {
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });
         output += "=============================\n";
-        output += "=== Wild Cards ===\n";
+        output += "========= Wild Card =========\n";
         standingsObject.WesternWildCard.forEach((team, index) => {
             output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
         });    
