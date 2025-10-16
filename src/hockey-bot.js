@@ -114,7 +114,11 @@ async function getWeeklyStandings(){
         output += "=============================\n";
         output += "========= Wild Card =========\n";
         standingsObject.EasternWildCard.forEach((team, index) => {
-            output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
+            if(index == 2){
+                output += `__${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})__ \n`; 
+            } else{
+                output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`;
+            }
         });
         output += "=============================\n \n";
 
@@ -133,8 +137,11 @@ async function getWeeklyStandings(){
         output += "=============================\n";
         output += "========= Wild Card =========\n";
         standingsObject.WesternWildCard.forEach((team, index) => {
-            output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`; 
-        });    
+            if(index == 2){
+                output += `__${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})__ \n`; 
+            } else{
+                output += `${index+1}. ${team.teamAbbrev.default} - ${team.points} pts (${team.wins}-${team.losses}-${team.otLosses})\n`;
+            }        });    
 
         output += '=============================\n';
         return output;
