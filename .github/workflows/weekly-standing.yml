@@ -62,6 +62,7 @@ jobs:
         env:
             DISCORD_WEBHOOK: ${{ env.DISCORD_WEBHOOK }}
             DISCORD_USERNAME: Hockey Bot
+            DISCORD_AVATAR: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlnFcrQXKaFxm6NpM62xqHxRXsJTrsU6sBZ_xTH6QLSjz0j74Fdzor-4c7SF7qTls6364
         uses: Ilshidur/action-discord@master
         with:
           args: "${{ steps.get_schedule.outputs.schedule }}"
