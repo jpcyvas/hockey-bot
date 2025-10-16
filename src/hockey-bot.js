@@ -70,7 +70,7 @@ async function getDailyData(){
 
 async function getWeeklyStandings(){
     const data = await makeAPICall(hockeyApiUrlWeeklyStandings);
-    var output = "===== NHL Weekly Standings "+getTodaysDate()+" =====\n";
+    var output = "===== NHL Weekly Standings "+getTodaysDate()+" =====\n \n \n";
 
     var standingsObject = {
         EasternAtlantic: [],
