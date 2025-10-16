@@ -38,6 +38,7 @@ jobs:
         env:
             DISCORD_WEBHOOK: ${{ env.DISCORD_WEBHOOK }}
             DISCORD_USERNAME: Hockey Bot
+            DISCORD_AVATAR: https://preview.redd.it/7vhwwme8t76b1.jpg?width=872&auto=webp&s=75ce72088c5ba239c9bde22f96b5227ece9f6d82
         uses: Ilshidur/action-discord@master
         with:
           args: "${{ github.event.inputs.message }}"
