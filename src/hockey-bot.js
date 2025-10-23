@@ -43,7 +43,7 @@ async function getDailyData(){
                    
                     //get teams
                     if(data.gameWeek[key].games[y].awayTeam.abbrev == 'CHI' || data.gameWeek[key].games[y].awayTeam.abbrev == 'STL' || data.gameWeek[key].games[y].homeTeam.abbrev == 'CHI' || data.gameWeek[key].games[y].homeTeam.abbrev == 'STL'){
-                        output += "**"+data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev+"**";
+                        output += "__**"+data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev+"**__";
                     }
                     else{
                         output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev;
