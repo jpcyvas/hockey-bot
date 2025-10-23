@@ -42,7 +42,12 @@ async function getDailyData(){
                 for(var y = 0; y < data.gameWeek[key].games.length;y++){
                    
                     //get teams
-                    output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev;
+                    if(data.gameWeek[key].games[y].awayTeam.abbrev == 'CHI' || data.gameWeek[key].games[y].awayTeam.abbrev == 'STL' || data.gameWeek[key].games[y].homeTeam.abbrev == 'CHI' || data.gameWeek[key].games[y].homeTeam.abbrev == 'STL'){
+                        output += "**"+data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev+"**";
+                    }
+                    else{
+                        output += data.gameWeek[key].games[y].awayTeam.abbrev + " at " + data.gameWeek[key].games[y].homeTeam.abbrev;
+                    }
 
 
                      //convert UTC time to local time
