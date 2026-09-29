@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const hockeyApiUrlDailyGames = 'https://api-web.nhle.com/v1/schedule/';
-const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/';
+const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/now';
 
 //Get today's date in YYYY-MM-DD format
 function getTodaysDate() {
