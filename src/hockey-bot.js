@@ -7,7 +7,6 @@ const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/';
 function getTodaysDate() {
     // produce YYYY-MM-DD in US Central time
     const now = new Date();
-    now.setDate(now.getDate() + 1);
     return now.toLocaleDateString('en-CA', { timeZone: 'America/Chicago' });
 }
 
