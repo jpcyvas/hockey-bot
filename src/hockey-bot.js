@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const hockeyApiUrlDailyGames = 'https://api-web.nhle.com/v1/schedule/';
-const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/now';
+const hockeyApiUrlWeeklyStandings = 'https://api-web.nhle.com/v1/standings/';
 
 //Get today's date in YYYY-MM-DD format
 function getTodaysDate() {
@@ -73,7 +73,7 @@ async function getDailyData(){
 }
 
 async function getWeeklyStandings(){
-    const data = await makeAPICall(hockeyApiUrlWeeklyStandings);
+    const data = await makeAPICall(hockeyApiUrlWeeklyStandings+getTodaysDate());
     var output = "\n # NHL Weekly Standings "+getTodaysDate()+" \n \n";
 
     var standingsObject = {
